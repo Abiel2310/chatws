@@ -2,13 +2,13 @@ let stompClient = null;
 
 function connect() {
     const serverIp = document.getElementById('serverIp').value;
-    const socket = new SockJS(`http://${serverIp}:8080/chat`);
+    const socket = new SockJS(`http://${serverIp}:8080/ws`);
     stompClient = Stomp.over(socket);
     
     stompClient.connect(function (frame) {
         console.log('Connected: ' + frame);
         setConnected(true);
-        stompClient.subscribe('/topic/messages', function (message) {
+        stompClient.subscribe('/topic/public', function (message) {
             showMessage(JSON.parse(message.body));
         });  
     }, function (error) {
@@ -43,7 +43,7 @@ function sendMessage() {
     
     if (content.trim() === '') return;
     
-    stompClient.send("/app/chat", {}, JSON.stringify({'tipo': 'MENSAJE', 'usuario': username, 'contenido': content}));
+    stompClient.send("/app/chat.sendMessage", {}, JSON.stringify({'tipo': 'MENSAJE', 'usuario': username, 'contenido': content}));
     
     document.getElementById('message').value = '';
 }
