@@ -1,4 +1,9 @@
+server:
+  port: 8080
+
+
 spring:
+<<<<<<< HEAD
   application:
     name: chatws
   rabbitmq:
@@ -7,3 +12,10 @@ spring:
     username: ${RABBITMQ_USERNAME:guest}
     password: ${RABBITMQ_PASSWORD:guest}
     stomp-port: ${RABBITMQ_STOMP_PORT:61613}
+=======
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+>>>>>>> Abiel/main

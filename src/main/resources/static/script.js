@@ -2,6 +2,7 @@ let stompClient = null;
 
 function connect() {
     const serverIp = document.getElementById('serverIp').value;
+<<<<<<< HEAD
     const socket = new SockJS(`http://${serverIp}:8080/ws`);
     stompClient = Stomp.over(socket);
     
@@ -14,6 +15,17 @@ function connect() {
     }, function (error) {
         console.error('Connection error: ' + error);
         setConnected(false);
+=======
+    const port = 8080;
+    const socket = new SockJS(`http://${serverIp}:${port}/ws`);
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        setConnected(true);
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/public', function (message) {
+            showMessage(JSON.parse(message.body));
+        });
+>>>>>>> Abiel/main
     });
 }
 
@@ -40,11 +52,19 @@ function setConnected(connected) {
 function sendMessage() {
     const username = document.getElementById('username').value;
     const content = document.getElementById('message').value;
+<<<<<<< HEAD
     
     if (content.trim() === '') return;
     
     stompClient.send("/app/chat.sendMessage", {}, JSON.stringify({'tipo': 'MENSAJE', 'usuario': username, 'contenido': content}));
     
+=======
+
+    if (content.trim() === '' || stompClient === null) return;
+
+    stompClient.send("/app/chat.sendMessage", {}, JSON.stringify({ tipo: 'CHAT', usuario: username, contenido: content }));
+
+>>>>>>> Abiel/main
     document.getElementById('message').value = '';
 }
 

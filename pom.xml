@@ -27,12 +27,21 @@
         <url/>
     </scm>
     <properties>
+<<<<<<< HEAD
         <java.version>25</java.version>
+=======
+        <java.version>17</java.version>
+>>>>>>> Abiel/main
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
         <dependency>
